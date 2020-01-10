@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Kirill Sumorokov
+  description: Configure dnsmasq.
+
+  license: MIT
+
+  platforms:
+    - name: Debian
+      versions:
+        - jessie
+    - name: MacOS
+
+  min_ansible_version: 2.4
+
+  galaxy_tags: ['openssl']

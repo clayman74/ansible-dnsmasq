@@ -1,0 +1,11 @@
+---
+
+- name: Install dnsmasq
+  homebrew:
+    name: dnsmasq
+
+- name: Create folders
+  file: path=/usr/local/{{ dnsmasq_conf }} state=directory
+
+- name: Assemble config
+  template: src=dnsmasq.conf.j2 dest=/usr/local/etc/dnsmasq.conf
