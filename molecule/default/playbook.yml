@@ -3,5 +3,23 @@
   hosts: all
   become: true
 
+  vars:
+    test_domain: dev.example.com
+    test_host: 127.0.0.1
+
+  handlers:
+    - name: restart dnsmasq
+      systemd: name=dnsmasq state=restarted
+
   roles:
     - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+
+  tasks:
+    - name: Install packages
+      apt:
+        name:
+          - dnsutils
+
+    - name: Add test domain
+      template: src=templates/dnsmasq.conf.j2 dest={{ dnsmasq_conf }}/dev.example.com.conf
+      notify: restart dnsmasq
